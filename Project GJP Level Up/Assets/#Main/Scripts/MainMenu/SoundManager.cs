@@ -1,30 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] Slider volumeSlider;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] AudioSource BGM;
+    [SerializeField] AudioSource SFX;
+    
+
+    public AudioClip BGMClip;
+    public AudioClip SFXClip;
+
+    public void Start()
     {
-        
+
+        BGM.clip = BGMClip;
+        BGM.Play();
+    
+
     }
 
-    // Update is called once per frame
-    public void changeVolume()
+    public void playSFX(AudioClip Clip)
     {
-        AudioListener.volume = volumeSlider.value;
+        SFX.PlayOneShot(Clip);
     }
 
-    private void load()
-    {
-        volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
-    }
-
-    private void save()
-    {
-        PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
-    }
+    
 }
